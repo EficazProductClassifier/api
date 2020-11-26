@@ -14,14 +14,15 @@ class CreateProductsTable extends Migration
     public function up()
     {
         Schema::create('products', function (Blueprint $table) {
-            $table->uuid('id');
+            $table->id();
+            $table->uuid('uuid');
             $table->unsignedBigInteger('category_id');
             $table->string('nome');
             $table->string('descricao');
             $table->float('valor', 8, 2);
             $table->integer('estoque'); 
 
-            $table->foreign('user_id')->references('id')->on('users');
+            $table->foreign('category_id')->references('id')->on('categories');
             $table->timestamps(); // data e hora de cadastro
         });
     }
