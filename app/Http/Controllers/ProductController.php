@@ -7,6 +7,15 @@ use Illuminate\Http\Request;
 class ProductController extends Controller
 {
     /**
+     * Repository instance for model management.
+     */
+    protected $repository;
+
+    public function __construct(IProductRepository $repository)
+    {
+        $this->repository = $repository;
+    }
+    /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
