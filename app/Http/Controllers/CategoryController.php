@@ -44,45 +44,37 @@ class CategoryController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  int  $id
+     * @param  string $uuid
      * @return \Dingo\Api\Http\Response
      */
-    public function show(int $id)
+    public function show(string $uuid)
     {
-        //
+        $category = $this->repository->get($uuid); 
+        return $this->response->item($category, new CategoryTransformer);
     }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Dingo\Api\Http\Response
-     */
-    public function edit(int $id)
-    {
-        //
-    }
-
+    
     /**
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
+     * @param  string $uuid
      * @return \Dingo\Api\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, string $uuid)
     {
-        //
+        $category = $this->repository->update($request->all());
+        return $this->response->item($category, new CategoryTransformer);
     }
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int  $id
+     * @param  string $uuid
      * @return \Dingo\Api\Http\Response
      */
-    public function destroy($id)
+    public function destroy(string $uuid)
     {
-        //
+        $this->repository->delete($uuid);
+        return $this->response->accepted(null, ['message' => 'Entity deleted', 'status_code' => 202]);
     }
 }

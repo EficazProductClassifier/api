@@ -12,6 +12,7 @@ use App\Transformers\ProductTransformer;
 
 // Requests
 use App\Http\Requests\StoreProductRequest;
+use App\Http\Requests\UpdateProductRequest;
 
 class ProductController extends Controller
 {
@@ -60,36 +61,27 @@ class ProductController extends Controller
     }
 
     /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Dingo\Api\Http\Response
-     */
-    public function edit($id)
-    {
-        //
-    }
-
-    /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
+     * @param  UpdateProductRequest $request
+     * @param  string $id
      * @return \Dingo\Api\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(UpdateProductRequest $request, string $uuid)
     {
-        //
+        $product = $this->repository->update($request->all(), $uuid);
+        return $this->response->item($product, new ProductTransformer);
     }
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int  $id
+     * @param  string $uuid
      * @return \Dingo\Api\Http\Response
      */
-    public function destroy($id)
+    public function destroy(string $uuid)
     {
-        //
+        $this->repository->delete($uuid);
+        return $this->response->accepted(null, ['message' => 'Entity deleted', 'status_code' => 202]);
     }
 }
