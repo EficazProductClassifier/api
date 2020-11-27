@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Contracts\IProductRepository;
+use App\Transformers\ProductTransformer;
 
 class ProductController extends Controller
 {
@@ -15,14 +17,16 @@ class ProductController extends Controller
     {
         $this->repository = $repository;
     }
+
     /**
-     * Display a listing of the resource.
+     * [GET] Display a listing of the resource.
      *
-     * @return \Illuminate\Http\Response
+     * @return \Dingo\Api\Http\Response
      */
     public function index()
     {
-        //
+        $products = $this->repository->all();
+        return $this->response->paginator($products, new ProductTransformer);
     }
 
     /**
