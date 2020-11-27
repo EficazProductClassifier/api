@@ -19,11 +19,11 @@ class CategoryRepository implements ICategoryRepository
     /**
      * Gets a value for especific resource.
      *
-     * @param int $resource_id
+     * @param int $resource_uuid
      * @return \Illuminate\\Database\\Eloquent\\Model;
      */
-    function get(int $resource_id){
-        return Category::findOrFail($resource_id);
+    function get(string $resource_uuid){
+        return Category::findOrFail($resource_uuid);
     }
 
     /**
@@ -41,20 +41,21 @@ class CategoryRepository implements ICategoryRepository
      * Updating logic.
      *
      * @param array $resource_data
-     * @param int   $resource_id
+     * @param string $resource_uuid
      * @return \Illuminate\\Database\\Eloquent\\Model;
      */
-    function update(array $resource_data, int $resource_id){
-
+    function update(array $resource_data, string $resource_uuid){
+        $category = Category::findOrFail($resource_uuid);
+        dd($category);
     }
 
     /**
      * Deletion logic.
      *
-     * @param int $resource_id
+     * @param string $resource_uuid
      * @return mixed
      */
-    function delete(int $resource_id){
-    
+    function delete(string $resource_uuid){
+        return Category::findOrFail($resource_uuid)->delete();
     }
 }

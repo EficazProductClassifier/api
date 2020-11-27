@@ -14,10 +14,10 @@ interface IRepository
     /**
      * Gets a value for especific resource.
      *
-     * @param int $resource_id
+     * @param string $resource_uuid
      * @return \Illuminate\\Database\\Eloquent\\Model;
      */
-    function get(int $resource_id);
+    function get(string $resource_uuid);
 
     /**
      * Storing logic for the resource.
@@ -31,17 +31,17 @@ interface IRepository
      * Updating logic.
      *
      * @param array $resource_data
-     * @param int   $resource_id
+     * @param string $resource_uuid
      * @return \Illuminate\\Database\\Eloquent\\Model;
      */
-    function update(array $resource_data, int $resource_id);
+    function update(array $resource_data, string $resource_uuid);
 
 
     /**
      * Deletion logic.
      *
-     * @param int $resource_id
+     * @param string $resource_uuid
      * @return mixed
      */
-    function delete(int $resource_id);
+    function delete(string $resource_uuid);
 }
