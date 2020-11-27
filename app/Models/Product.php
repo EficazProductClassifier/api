@@ -11,6 +11,19 @@ class Product extends Model
     use HasFactory, Uuid;
 
     /**
+     * The attributes that are mass assignable.
+     *
+     * @var array
+     */
+    protected $fillable = [
+        'nome',
+        'descricao',
+        'valor',
+        'estoque',
+        'category_id'
+    ];
+
+    /**
      * Indicates if the IDs are auto-incrementing.
      *
      * @var bool
