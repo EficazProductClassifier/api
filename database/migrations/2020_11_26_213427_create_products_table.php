@@ -21,7 +21,7 @@ class CreateProductsTable extends Migration
             $table->integer('estoque'); 
             $table->uuid('category_id')->nullable(false);
 
-            $table->foreign('category_id')->references('id')->on('categories');
+            $table->foreign('category_id')->references('id')->on('categories')->onDelete('cascade');
             $table->timestamps(); // data e hora de cadastro
         });
     }

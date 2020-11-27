@@ -62,7 +62,7 @@ class CategoryController extends Controller
      */
     public function update(Request $request, string $uuid)
     {
-        $category = $this->repository->update($request->all());
+        $category = $this->repository->update($request->all(), $uuid);
         return $this->response->item($category, new CategoryTransformer);
     }
 
