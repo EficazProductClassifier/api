@@ -34,7 +34,6 @@ class CategoryRepository implements ICategoryRepository
      */
     function store(array $resource_data){
         return Category::create($resource_data);
-
     }
 
     /**
@@ -46,7 +45,8 @@ class CategoryRepository implements ICategoryRepository
      */
     function update(array $resource_data, string $resource_uuid){
         $category = Category::findOrFail($resource_uuid);
-        dd($category);
+        $category->update($resource_data);
+        return $category;
     }
 
     /**

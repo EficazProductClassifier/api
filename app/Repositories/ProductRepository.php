@@ -34,7 +34,6 @@ class ProductRepository implements IProductRepository
      */
     function store(array $resource_data){
         return Product::create($resource_data);
-
     }
 
     /**
@@ -45,7 +44,9 @@ class ProductRepository implements IProductRepository
      * @return \Illuminate\\Database\\Eloquent\\Model;
      */
     function update(array $resource_data, string $resource_uuid){
-        return Product::findOrFail($resource_uuid)->update($resource_data);
+        $product = Product::findOrFail($resource_uuid);
+        $product->update($resource_data);
+        return $product;
     }
 
     /**
