@@ -13,7 +13,7 @@ class ProductRepository implements IProductRepository
      * @return mixed
      */
     function all(){
-        return Product::all()->paginate(env('MAX_ITEMS_PER_PAGE', 25));
+        return Product::paginate(env('MAX_ITEMS_PER_PAGE', 25));
     }
 
     /**
