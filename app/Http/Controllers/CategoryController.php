@@ -38,8 +38,7 @@ class CategoryController extends Controller
      */
     public function store(StoreCategoryRequest $request)
     {
-        $request_data = $request->only(['nome', 'descricao']);
-        $category = $this->repository->store($request_data);
+        $category = $this->repository->store($request->all());
         return $this->response->item($category, new CategoryTransformer)->statusCode(201);
     }
     /**

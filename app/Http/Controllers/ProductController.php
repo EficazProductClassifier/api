@@ -11,7 +11,7 @@ use App\Contracts\IProductRepository;
 use App\Transformers\ProductTransformer;
 
 // Requests
-use App\Requests\StoreCategoryRequest;
+use App\Http\Requests\StoreProductRequest;
 
 class ProductController extends Controller
 {
@@ -41,9 +41,10 @@ class ProductController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function store()
+    public function store(StoreProductRequest $request)
     {
-        //
+        $product = $this->repository->store($request->all());
+        return $this->response->item($product, new ProductTransformer)->statusCode(201);
     }
 
     /**
