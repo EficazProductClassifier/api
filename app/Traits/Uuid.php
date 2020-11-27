@@ -17,7 +17,7 @@ trait Uuid
 
         static::creating(function ($model) {
             try {
-                $model->uuid = (string) Str::uuid(); // generate uuid
+                $model->id= (string) Str::uuid(); // generate uuid
             } catch (UnsatisfiedDependencyException $e) {
                 abort(500, $e->getMessage());
             }

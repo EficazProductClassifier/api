@@ -8,5 +8,19 @@ use App\Traits\Uuid;
 
 class Category extends Model
 {
-    use HasFactory, Uuid;
+    use HasFactory, Uuid; 
+
+    /**
+     * Indicates if the IDs are auto-incrementing.
+     *
+     * @var bool
+     */
+    public $incrementing = false;
+
+    /**
+     * The "type" of the auto-incrementing ID.
+     *
+     * @var string
+     */
+    protected $keyType = 'uuid';
 }
