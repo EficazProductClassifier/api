@@ -3,17 +3,30 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Contracts\ICategoryRepository;
+use App\Transformers\CategoryTransformer;
 
 class CategoryController extends Controller
 {
     /**
-     * Display a listing of the resource.
+     * Repository instance for model management.
+     */
+    protected $repository;
+
+    public function __construct(ICategoryRepository $repository)
+    {
+        $this->repository = $repository;
+    }
+
+    /**
+     * [GET] Display a listing of the resource.
      *
-     * @return \Illuminate\Http\Response
+     * @return \Dingo\Api\Http\Response
      */
     public function index()
     {
-        //
+        $categories = $this->repository->all();
+        return $this->response->paginator($categories, new CategoryTransformer);
     }
 
     /**
