@@ -3,82 +3,78 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Contracts\ICategoryRepository;
+use App\Transformers\CategoryTransformer;
+use App\Http\Requests\StoreCategoryRequest;
 
 class CategoryController extends Controller
 {
     /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
+     * Repository instance for model management.
      */
-    public function index()
+    protected $repository;
+
+    public function __construct(ICategoryRepository $repository)
     {
-        //
+        $this->repository = $repository;
     }
 
     /**
-     * Show the form for creating a new resource.
+     * [GET] Display a listing of the resource.
      *
-     * @return \Illuminate\Http\Response
+     * @return \Dingo\Api\Http\Response
      */
-    public function create()
+    public function index()
     {
-        //
+        $categories = $this->repository->all();
+        return $this->response->paginator($categories, new CategoryTransformer);
     }
 
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
+     * @param StoreCategoryRequest $request
+     * @return \Dingo\Api\Http\Response
      */
-    public function store(Request $request)
+    public function store(StoreCategoryRequest $request)
     {
-        //
+        $category = $this->repository->store($request->all());
+        return $this->response->item($category, new CategoryTransformer)->statusCode(201);
     }
-
     /**
      * Display the specified resource.
      *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * @param  string $uuid
+     * @return \Dingo\Api\Http\Response
      */
-    public function show($id)
+    public function show(string $uuid)
     {
-        //
+        $category = $this->repository->get($uuid); 
+        return $this->response->item($category, new CategoryTransformer);
     }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
-    {
-        //
-    }
-
+    
     /**
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * @param  string $uuid
+     * @return \Dingo\Api\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, string $uuid)
     {
-        //
+        $category = $this->repository->update($request->all(), $uuid);
+        return $this->response->item($category, new CategoryTransformer);
     }
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * @param  string $uuid
+     * @return \Dingo\Api\Http\Response
      */
-    public function destroy($id)
+    public function destroy(string $uuid)
     {
-        //
+        $this->repository->delete($uuid);
+        return $this->response->accepted(null, ['message' => 'Entity deleted', 'status_code' => 202]);
     }
 }
