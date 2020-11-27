@@ -3,8 +3,15 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+
+// Contracts 
 use App\Contracts\IProductRepository;
+
+// Transformers
 use App\Transformers\ProductTransformer;
+
+// Requests
+use App\Requests\StoreCategoryRequest;
 
 class ProductController extends Controller
 {
@@ -30,22 +37,11 @@ class ProductController extends Controller
     }
 
     /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
-    }
-
-    /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store()
     {
         //
     }

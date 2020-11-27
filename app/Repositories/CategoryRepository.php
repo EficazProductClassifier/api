@@ -23,7 +23,7 @@ class CategoryRepository implements ICategoryRepository
      * @return \Illuminate\\Database\\Eloquent\\Model;
      */
     function get(int $resource_id){
-        return Product::findOrFail($resource_id);
+        return Category::findOrFail($resource_id);
     }
 
     /**
@@ -33,7 +33,7 @@ class CategoryRepository implements ICategoryRepository
      * @return \Illuminate\\Database\\Eloquent\\Model;
      */
     function store(array $resource_data){
-        return Product::create($resource_data);
+        return Category::create($resource_data);
 
     }
 
