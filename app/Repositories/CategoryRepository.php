@@ -2,18 +2,29 @@
 
 namespace App\Repositories;
 
+/**
+ * Query builder for sorting and filtering 
+ * based on URL query parameters.
+ **/
+use Spatie\QueryBuilder\QueryBuilder;
+
 use App\Contracts\ICategoryRepository;
 use App\Models\Category;
 
 class CategoryRepository implements ICategoryRepository 
 {
-   /**
-     * Gets all the values for a given resource. 
+    /**
+     * Gets all the values for a given resource
+     * and filter based on the query parameters. 
      *
      * @return mixed
      */
     function all(){
-        return Category::paginate(env('MAX_ITEMS_PER_PAGE', 25));
+        return QueryBuilder::for(Category::class)
+            ->allowedFilters(['nome', 'descricao'])
+            ->defaultSort('nome')
+            ->allowedSorts(['nome', 'descricao'])
+            ->paginate(env('MAX_ITEMS_PER_PAGE', 15));
     }
 
     /**
@@ -24,6 +35,7 @@ class CategoryRepository implements ICategoryRepository
      */
     function get(string $resource_uuid){
         return Category::findOrFail($resource_uuid);
+
     }
 
     /**
