@@ -36,4 +36,12 @@ class Product extends Model
      * @var string
      */
     protected $keyType = 'uuid';
+
+    /**
+     * Get the category of the product.
+     */
+    public function category(){
+        return $this->belongsTo('App\Models\Category'); 
+    } 
+    
 }
