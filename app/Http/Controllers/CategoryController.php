@@ -38,7 +38,7 @@ class CategoryController extends Controller
      */
     public function store(StoreCategoryRequest $request)
     {
-        $category = $this->repository->store($request->all());
+        $category = $this->repository->store($request->validated());
         return $this->response->item($category, new CategoryTransformer)->statusCode(201);
     }
     /**
@@ -62,7 +62,7 @@ class CategoryController extends Controller
      */
     public function update(Request $request, string $uuid)
     {
-        $category = $this->repository->update($request->all(), $uuid);
+        $category = $this->repository->update($request->validated(), $uuid);
         return $this->response->item($category, new CategoryTransformer);
     }
 

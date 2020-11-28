@@ -44,7 +44,7 @@ class ProductController extends Controller
      */
     public function store(StoreProductRequest $request)
     {
-        $product = $this->repository->store($request->all());
+        $product = $this->repository->store($request->validated());
         return $this->response->item($product, new ProductTransformer)->statusCode(201);
     }
 
@@ -69,7 +69,7 @@ class ProductController extends Controller
      */
     public function update(UpdateProductRequest $request, string $uuid)
     {
-        $product = $this->repository->update($request->all(), $uuid);
+            $product = $this->repository->update($request->validated(), $uuid);
         return $this->response->item($product, new ProductTransformer);
     }
 
