@@ -2,6 +2,13 @@
 
 namespace App\Repositories;
 
+/**
+ * Query builder for sorting and filtering 
+ * based on URL query parameters.
+ **/
+use Spatie\QueryBuilder\QueryBuilder;
+use Spatie\QueryBuilder\AllowedFilter;
+
 use App\Contracts\IProductRepository;
 use App\Models\Product;
 
@@ -13,7 +20,12 @@ class ProductRepository implements IProductRepository
      * @return mixed
      */
     function all(){
-        return Product::paginate(env('MAX_ITEMS_PER_PAGE', 25));
+        $filters = ['nome', 'descricao', AllowedFilter::exact('valor'), AllowedFilter::exact('estoque')];
+        return QueryBuilder::for(Product::class)
+            ->allowedFilters($filters)
+            ->defaultSort('nome')
+            ->allowedSorts(['nome', 'descricao'])
+            ->paginate(env('MAX_ITEMS_PER_PAGE', 15));
     }
 
     /**
