@@ -8,6 +8,13 @@ use League\Fractal\TransformerAbstract;
 class ProductTransformer extends TransformerAbstract
 {
     /**
+     * list of resources possible to include
+     *
+     * @var array
+     */
+    protected $defaultIncludes = ['category'];
+
+    /**
      * Turn this item object into a generic array
      *
      * @param Product $contact
@@ -15,6 +22,7 @@ class ProductTransformer extends TransformerAbstract
      */
     public function transform(Product $product)
     {
+        dd($product->category->nome);
         return [
             'id'            => $product->id,
             'nome'          => $product->nome,
@@ -22,11 +30,23 @@ class ProductTransformer extends TransformerAbstract
             'valor'         => $product->valor,
             'estoque'       => $product->estoque,
             'hora_cadastro' => $product->created_at,
-            'categoria'     => [
-                'id'        => $product->id,
-                'nome'      => $product->category->nome,
+            'category'      => {
+                'nome' => $product->category->nome 
                 'descricao' => $product->category->descricao
-            ]
+            }
         ];
+    }
+
+    /**
+     * Include socials 
+     *
+     * @param Product $product
+     * @return \League\Fractal\Resource\Item
+     */
+    public function includeCategory(Product $product){
+        if($product->category === null)
+            return null;
+
+        return $this->item($product->category, new CategoryTransformer); 
     }
 }
