@@ -1,12 +1,13 @@
 # Eficaz Product Classifier - API.  
-Version: 1.0
-Last Updated: November 28th 2020
+Version: 1.0  
+Last Updated: November 28th 2020  
 
 # Payload filtering
-This API uses [spatie/laravel-query-builder](https://github.com/spatie/laravel-query-builder) package for filtering GET requests
+This API uses [spatie/laravel-query-builder](https://github.com/spatie/laravel-query-builder) package 
+for filtering GET requests with potentially massive response payloads
 for his API endpoints. this package provides the following query parameters:
-*filter*: Used to filter for fields that are similar or exactly as the provided.
-*sort*: Used to sort for a field ascendenly or descendingly. 
+**filter**: Used to filter for fields that are similar or exactly as the provided.  
+**sort**: Used to sort for a field ascendenly or descendingly.  
 
 # Endpoints
 
@@ -14,9 +15,9 @@ for his API endpoints. this package provides the following query parameters:
 
     GET https://localhost:8000/api/product
 
-- Accepts Payload Filtering: Yes
-- *Parameter*: None
-- *Response Payload*: 
+- **Accepts Payload Filtering**: Yes
+- **Parameter**: None
+- **Response Payload**: 
 ```json
 {
     "data": [
@@ -44,7 +45,7 @@ for his API endpoints. this package provides the following query parameters:
 
     POST https://localhost:8000/api/product
 
-- *Parameter*: 
+- **Parameter**: 
 ```json 
 {
     "nome": "product",
@@ -54,7 +55,7 @@ for his API endpoints. this package provides the following query parameters:
     "category_id": "24556a88-44a8-40fb-b74e-46cbadbfbc32"
 }
 ```
-- *Response Payload*: 
+- **Response Payload**: 
 ```json
 {
   "data": {
@@ -73,8 +74,8 @@ for his API endpoints. this package provides the following query parameters:
 ## Display the specified product.
     GET localhost:8000/api/product/aeddf040-f827-4531-9291-474a7c6e59ed
 
-- *Parameters*: None
-- *Response Payload*:
+- **Parameters**: None
+- **Response Payload**:
 ```json
 {
   "data": {
@@ -93,7 +94,7 @@ for his API endpoints. this package provides the following query parameters:
 ## Update the specified product in storage.
     PUT localhost:8000/api/product/aeddf040-f827-4531-9291-474a7c6e59ed
 
-- *Parameters* 
+- **Parameters** 
 ```json
 {
     "nome": "Updated product",
@@ -103,7 +104,7 @@ for his API endpoints. this package provides the following query parameters:
     "category_id": "10f42839-5845-4e50-9203-97f917741e17"
 }
 ```
-- *Response*:
+- **Response**:
 ```json
 {
   "data": {
@@ -127,8 +128,8 @@ for his API endpoints. this package provides the following query parameters:
 ## Remove the specified product from storage.
     DELETE 127.0.0.1:8000/api/product/aeddf040-f827-4531-9291-474a7c6e59ed
 
-- *Parameters*: None
-- *Response*: 
+- **Parameters**: None
+- **Response**: 
 ```json
 {
   "message": "Entity deleted",

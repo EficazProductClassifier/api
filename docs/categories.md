@@ -1,12 +1,13 @@
 # Eficaz Product Classifier - API.  
-Version: 1.0
-Last Updated: November 28th 2020
+Version: 1.0  
+Last Updated: November 28th 2020  
 
 # Payload filtering
-This API uses [spatie/laravel-query-builder](https://github.com/spatie/laravel-query-builder) package for filtering GET requests
+This API uses [spatie/laravel-query-builder](https://github.com/spatie/laravel-query-builder) package 
+for filtering GET requests with potentially massive response payloads
 for his API endpoints. this package provides the following query parameters:
-*filter*: Used to filter for fields that are similar or exactly as the provided.
-*sort*: Used to sort for a field ascendenly or descendingly. 
+**filter**: Used to filter for fields that are similar or exactly as the provided.  
+**sort**: Used to sort for a field ascendenly or descendingly.  
 
 # Endpoints
 
@@ -14,9 +15,9 @@ for his API endpoints. this package provides the following query parameters:
 
     GET https://localhost:8000/api/category
 
-- Accepts Payload Filtering: Yes
-- *Parameter*: None
-- *Response Payload*: 
+- **Accepts Payload Filtering**: Yes
+- **Parameter**: None
+- **Response Payload**: 
 ```json
 {
     "data": [
@@ -36,14 +37,14 @@ for his API endpoints. this package provides the following query parameters:
 
     POST https://localhost:8000/api/category
 
-- *Parameter*: 
+- **Parameter**: 
 ```json 
 {
 	"nome": "Limpeza1",
 	"descricao": "Categoria de limpeza"
 }
 ```
-- *Response Payload*: 
+- **Response Payload**: 
 ```json
 {
   "data": {
@@ -59,8 +60,8 @@ for his API endpoints. this package provides the following query parameters:
 ## Display the specified category.
     GET localhost:8000/api/category/73e77de0-db57-45cd-a9d1-d083d5ab8aaa
 
-- *Parameters*: None
-- *Response Payload*:
+- **Parameters**: None  
+- **Response Payload**:
 ```json
 {
   "data": {
@@ -76,14 +77,14 @@ for his API endpoints. this package provides the following query parameters:
 ## Update the specified category in storage.
     PUT localhost:8000/api/category/73e77de0-db57-45cd-a9d1-d083d5ab8aaa
 
-- *Parameters* 
+- **Parameters** 
 ```json
 {
 	"nome": "categoria limpa",
 	"descricao": "Categoria de limpa"
 }
 ```
-- *Response*:
+- **Response**:
 ```json
 {
   "data": {
@@ -99,8 +100,8 @@ for his API endpoints. this package provides the following query parameters:
 ## Remove the specified category from storage.
     DELETE 127.0.0.1:8000/api/category/24556a88-44a8-40fb-b74e-46cbadbfbc32
 
-- *Parameters*: None
-- *Response*: 
+- **Parameters**: None
+- **Response**: 
 ```json
 {
   "message": "Entity deleted",
