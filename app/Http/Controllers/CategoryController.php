@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Contracts\ICategoryRepository;
 use App\Transformers\CategoryTransformer;
 use App\Http\Requests\StoreCategoryRequest;
+use App\Http\Requests\UpdateCategoryRequest;
 
 class CategoryController extends Controller
 {
@@ -60,7 +61,7 @@ class CategoryController extends Controller
      * @param  string $uuid
      * @return \Dingo\Api\Http\Response
      */
-    public function update(Request $request, string $uuid)
+    public function update(UpdateCategoryRequest $request, string $uuid)
     {
         $category = $this->repository->update($request->validated(), $uuid);
         return $this->response->item($category, new CategoryTransformer);
