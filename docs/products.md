@@ -5,7 +5,7 @@ Last Updated: November 28th 2020
 # Payload filtering
 This API uses [spatie/laravel-query-builder](https://github.com/spatie/laravel-query-builder) package 
 for filtering GET requests with potentially massive response payloads
-for his API endpoints. this package provides the following query parameters:
+for his API endpoints. this package provides the following query parameters:  
 **filter**: Used to filter for fields that are similar or exactly as the provided.  
 **sort**: Used to sort for a field ascendenly or descendingly.  
 
@@ -108,14 +108,14 @@ for his API endpoints. this package provides the following query parameters:
 ```json
 {
   "data": {
-    "id": "aeddf040-f827-4531-9291-474a7c6e59ed"
+    "id": "aeddf040-f827-4531-9291-474a7c6e59ed",
     "nome": "Updated product",
     "descricao": "This is a product being updated",
     "valor": 6.99,
     "estoque": 10,
     "hora_cadastro": "2020-11-28T23:07:15.000000Z",
     "categoria": {
-        "id": "10f42839-5845-4e50-9203-97f917741e17"
+        "id": "10f42839-5845-4e50-9203-97f917741e17",
         "nome": "rem",
         "descricao": "Recusandae reprehenderit non."
     }
