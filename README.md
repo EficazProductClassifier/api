@@ -39,7 +39,7 @@ Build all the docker images necessary for the project:
 docker-compose up -d --build
 ```
 
-Create the database:
+Create the database (you can also add the `--seed` parameter if needed):
 ```sh
 php artisan migrate:fresh
 ```
