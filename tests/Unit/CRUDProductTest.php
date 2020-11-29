@@ -92,4 +92,29 @@ class CRUDProductTest extends TestCase
         $this->put('api/product/' . $random_id_from_new_products, $updateTo)
              ->assertStatus(200);
     }
+
+    /**
+     * Checks if the ProductController@delete
+     * method is deleting the desired resource.
+     *
+     * @test
+     * @return void
+     */
+    public function test_check_if_delete_method_in_product_controller_is_deleting_desired_resource(){
+        $rows = rand(1, 5);
+        Category::factory()->count($rows * 2)->create();
+        Product::factory()->count($rows)->create();
+        
+        $random_id_from_new_products = Product::inRandomOrder()
+            ->limit(1)
+            ->get()
+            ->toArray()[0]['id'];
+
+
+        $result = $this->delete('api/product/' . $random_id_from_new_products)
+             ->assertStatus(202);
+        $this->assertDeleted('products', ['id' => $random_id_from_new_products]);
+    }
+
+
 }

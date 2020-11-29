@@ -88,4 +88,25 @@ class CRUDCategoryTest extends TestCase
         $this->assertDatabaseHas('categories', $updateTo);
     }
 
+    /**
+     * Checks if the CategoryController@delete
+     * method is deleting the desired resource.
+     *
+     * @test
+     * @return void
+     */
+    public function test_check_if_delete_method_in_category_controller_is_deleting_desired_resource(){
+        $rows = rand(1, 5);
+        Category::factory()->count($rows)->create();
+        
+        $random_id_from_new_categories = Category::inRandomOrder()
+            ->limit(1)
+            ->get()
+            ->toArray()[0]['id'];
+
+        $result = $this->delete('api/category/' . $random_id_from_new_categories)
+             ->assertStatus(202);
+        $this->assertDeleted('categories', ['id' => $random_id_from_new_categories]);
+        
+    }
 }
