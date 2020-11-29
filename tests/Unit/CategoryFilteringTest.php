@@ -25,9 +25,56 @@ class CategoryFiltering extends TestCase
         Category::factory()->count(3)->create();
         Category::factory()->create($payload);
         $this->get('/api/category?filter[nome]=Limpeza')
-                       ->assertStatus(200)
-                       ->assertJson(['data' => [$payload]])
-                       ->assertJsonPath('meta.pagination.total', 1);
+             ->assertStatus(200)
+             ->assertJson(['data' => [$payload]])
+             ->assertJsonPath('meta.pagination.total', 1);
+    }
+
+
+    /**
+     * Creates two categories and checks 
+     * their position in relation to each other
+     * in ascending order.
+     * 
+     * @test
+     * @return void
+     */
+    public function test_sort_by_name_ascending_is_working()
+    {
+        $payloads = [
+            ['nome' => 'aaaaa'],
+            ['nome' => 'bbbbb']
+        ];
+        foreach($payloads as $payload) Category::factory()->create($payload);
+        $this->get('/api/category?sort=nome')
+            ->assertStatus(200)
+            ->assertJson(["data" => [
+                0 => [ "nome" => "aaaaa" ],
+                1 => [ "nome" => "bbbbb" ]
+            ]]);
+    }
+
+    /**
+     * Creates two categories and checks 
+     * their position in relation to each other
+     * in descending order.
+     * 
+     * @test
+     * @return void
+     */
+    public function test_sort_by_name_descending_is_working()
+    {
+        $payloads = [
+            ['nome' => 'aaaaa'],
+            ['nome' => 'bbbbb']
+        ];
+        foreach($payloads as $payload) Category::factory()->create($payload);
+        $this->get('/api/category?sort=-nome')
+            ->assertStatus(200)
+            ->assertJson(["data" => [
+                0 => [ "nome" => "bbbbb" ],
+                1 => [ "nome" => "aaaaa" ]
+            ]]);
     }
 }
 
