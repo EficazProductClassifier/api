@@ -21,6 +21,7 @@ RUN apt-get update && apt-get install -y \
     libxpm-dev \
     zlib1g-dev \
     libncurses5-dev \ 
+    libsqlite3-dev \
     libvpx-dev 
 
 # Clear cache
@@ -31,6 +32,7 @@ RUN docker-php-ext-install -j$(nproc) exif pcntl
 RUN docker-php-ext-configure gd --with-freetype=/usr/include/ --with-jpeg=/usr/include/ 
 RUN docker-php-ext-install -j$(nproc) gd
 RUN docker-php-ext-install -j$(nproc) mysqli pdo pdo_mysql
+RUN docker-php-ext-install -j$(nproc) pdo_sqlite
 
 # Install composer
 RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
