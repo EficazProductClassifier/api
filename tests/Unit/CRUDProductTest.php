@@ -71,4 +71,25 @@ class CRUDProductTest extends TestCase
              ->assertStatus(200);
     }
 
+    /**
+     * Checks if the ProductController@update
+     * method is updating the desired resource.
+     *
+     * @test
+     * @return void
+     */
+    public function test_check_if_update_method_in_product_controller_is_updating_desired_resource(){
+        $rows = rand(1, 5);
+        Category::factory()->count($rows * 2)->create();
+        Product::factory()->count($rows)->create();
+        
+        $random_id_from_new_products = Product::inRandomOrder()
+            ->limit(1)
+            ->get()
+            ->toArray()[0]['id'];
+
+        $updateTo = ['nome' => 'BestUpdateEver', 'descricao' => 'Update for the category', 'valor' => rand(0,5), 'estoque' => rand(0,5)];
+        $this->put('api/product/' . $random_id_from_new_products, $updateTo)
+             ->assertStatus(200);
+    }
 }

@@ -83,10 +83,8 @@ class CRUDCategoryTest extends TestCase
             ->toArray()[0]['id'];
 
         $updateTo = ['nome' => 'BestUpdateEver', 'descricao' => 'Update for the category'];
-
-        $this->put('api/category/' . $random_id_from_new_categories, $updateTo)
+        $result = $this->put('api/category/' . $random_id_from_new_categories, $updateTo)
              ->assertStatus(200);
-
         $this->assertDatabaseHas('categories', $updateTo);
     }
 
