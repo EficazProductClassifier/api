@@ -47,8 +47,28 @@ class CRUDProductTest extends TestCase
         $this->post('api/product', $productBeingAdded)
              ->assertStatus(201);
 
-        $this->get('api/product')
-             ->assertStatus(200)
-             ->assertJsonPath('meta.pagination.total', ($rows + 1));
+        $this->assertDatabaseCount('products', $rows+1);
     }
+
+    /**
+     * Checks if the ProductController@show
+     * method is showing the desired resource.
+     *
+     * @test
+     * @return void
+     */
+    public function test_check_if_show_method_in_product_controller_is_showing_desired_resource(){
+        $rows = rand(1, 5);
+        Category::factory()->count($rows * 2)->create();
+        Product::factory()->count($rows)->create();
+        
+        $random_id_from_new_products = Product::inRandomOrder()
+            ->limit(1)
+            ->get()
+            ->toArray()[0]['id'];
+
+        $this->get('api/product/' . $random_id_from_new_products)
+             ->assertStatus(200);
+    }
+
 }
