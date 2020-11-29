@@ -14,6 +14,7 @@ for his API endpoints. this package provides the following query parameters:
 
     GET https://localhost:8000/api/product
 
+- Accepts Payload Filtering: Yes
 - *Parameter*: None
 - *Response Payload*: 
 ```json
@@ -69,7 +70,7 @@ for his API endpoints. this package provides the following query parameters:
 
 ---
 
-## Display the specified resource.
+## Display the specified product.
     GET localhost:8000/api/product/aeddf040-f827-4531-9291-474a7c6e59ed
 
 - *Parameters*: None
@@ -89,7 +90,7 @@ for his API endpoints. this package provides the following query parameters:
 
 ---
 
-## Update the specified resource in storage.
+## Update the specified product in storage.
     PUT localhost:8000/api/product/aeddf040-f827-4531-9291-474a7c6e59ed
 
 - *Parameters* 
@@ -123,7 +124,7 @@ for his API endpoints. this package provides the following query parameters:
 
 ---
 
-## Remove the specified resource from storage.
+## Remove the specified product from storage.
     DELETE 127.0.0.1:8000/api/product/aeddf040-f827-4531-9291-474a7c6e59ed
 
 - *Parameters*: None
